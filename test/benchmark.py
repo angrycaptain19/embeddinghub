@@ -56,8 +56,7 @@ class CreateSpaceBenchmark(ThreadableBenchmark):
         self.space_names = [uuid.uuid4() for _ in range(self.num_runs())]
 
     def next_args(self):
-        for space in self.space_names:
-            yield space
+        yield from self.space_names
 
     def next_run(self, space):
         self.client().create_space(space, 3)
@@ -78,8 +77,7 @@ class FreezeSpaceBenchmark(ThreadableBenchmark):
             self.client().create_space(space, 3)
 
     def next_args(self):
-        for space in self.space_names:
-            yield space
+        yield from self.space_names
 
     def next_run(self, space):
         self.client().freeze_space(space)
@@ -98,8 +96,7 @@ class CreateSpaceBenchmark(ThreadableBenchmark):
         self.space_names = [uuid.uuid4() for _ in range(self.num_runs())]
 
     def next_args(self):
-        for space in self.space_names:
-            yield space
+        yield from self.space_names
 
     def next_run(self, space):
         self.client().create_space(space, 3)
