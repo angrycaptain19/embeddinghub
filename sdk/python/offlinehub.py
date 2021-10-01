@@ -80,7 +80,7 @@ class Index:
                 self._size += 1
             self._data[key] = embedding
         # add_items fails if you give it two empty arrays.
-        if len(idxs) == 0:
+        if not idxs:
             return
         self._add_capacity_to_fit(len(idxs))
         self._idx.add_items(embeddings, idxs)
@@ -164,12 +164,11 @@ class HnswlibIndexMapper:
         """
         if key in self._key_to_idx:
             return self._key_to_idx[key]
-        else:
-            idx = self._next_idx
-            self._next_idx += 1
-            self._key_to_idx[key] = idx
-            self._idx_to_key[idx] = key
-            return idx
+        idx = self._next_idx
+        self._next_idx += 1
+        self._key_to_idx[key] = idx
+        self._idx_to_key[idx] = key
+        return idx
 
     def to_key(self, idx):
         """ Turn a hnswlib index into the original key

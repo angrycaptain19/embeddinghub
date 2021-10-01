@@ -86,7 +86,7 @@ def test_multi_space(es_client):
         "a": [1, 2, 3],
         "b": [3, 2, 1],
     }
-    for space in embs.keys():
+    for space in embs:
         es_client.create_space(space, 3)
     for space, emb in embs.items():
         es_client.set(space, key, emb)
